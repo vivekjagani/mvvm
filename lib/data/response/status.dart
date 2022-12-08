@@ -1,0 +1,1 @@
+enum Status{LOGING,COMPLATED,ERROR}
