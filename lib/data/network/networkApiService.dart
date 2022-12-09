@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:http/http.dart' as http;
 import 'package:mvvm/data/app_exaption.dart';
 import 'package:mvvm/data/network/baseApiService.dart';
 
 class NetworkApiService extends BaseApiServices {
+
   @override
   Future getGetApiResponse(String url) async {
     dynamic responseJson;
@@ -47,4 +47,5 @@ class NetworkApiService extends BaseApiServices {
             'Error accourd while Communicating with server with Status Code${response.statusCode}');
     }
   }
+  
 }

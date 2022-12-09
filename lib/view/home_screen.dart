@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:mvvm/utils/routes/routes_name.dart';
+import 'package:mvvm/view_model/user_view_model.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,13 +13,19 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final userPrefrence = Provider.of<UserViewModel>(context);
     return Scaffold(
       appBar: AppBar(
-
-      ),
-      body: Column(
-        children: [
-          
+        title: const Text('TEXT'), 
+        actions: [
+          IconButton(
+            onPressed: () {
+              userPrefrence.remove().then((value) {
+                Navigator.pushNamed(context, RoutesName.login);
+              });
+            },
+            icon: const Icon(Icons.logout),
+          ),
         ],
       ),
     );

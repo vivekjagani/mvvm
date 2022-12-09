@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:mvvm/res/components/round_button.dart';
-import 'package:mvvm/utils/routes/routes_name.dart';
-import 'package:mvvm/utils/utils.dart';
-import 'package:mvvm/view_model/auth_view_model.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+import '../res/components/round_button.dart';
+import '../utils/routes/routes_name.dart';
+import '../utils/utils.dart';
+import '../view_model/auth_view_model.dart';
+
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   FocusNode emailFocusNode = FocusNode();
@@ -35,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final authViewModel = Provider.of<AuthViewModel>(context);
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Login"),
+          title: const Text("Signup"),
           centerTitle: true,
         ),
         body: Column(
@@ -99,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     'email': emailController.text,
                     'password': passwordController.text
                   };
-                  authViewModel.loginApi(
+                  authViewModel.signUpApi(
                     data,
                     context,
                   );
@@ -107,16 +110,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 }
               },
               title: 'Loging',
-              loading: authViewModel.loading,
+              loading: authViewModel.signUpLoading,
             ),
             SizedBox(
               height: height * 0.02,
             ),
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, RoutesName.signUp);
+                Navigator.pushNamed(context, RoutesName.login);
               },
-              child: Text("Don't Have Account ? SingUp"),
+              child: const Text("Don't Have Account ? LogIn"),
             )
           ],
         ));

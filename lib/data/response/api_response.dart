@@ -8,8 +8,8 @@ class ApiResponse<T> {
   ApiResponse(this.status,this.data,this.message);
 
   ApiResponse.loading():status =Status.LOGING;
-  ApiResponse.completed():status =Status.COMPLATED;
-  ApiResponse.error():status =Status.ERROR;
+  ApiResponse.completed(this.data):status =Status.COMPLATED;
+  ApiResponse.error(this.message):status =Status.ERROR;
 
 
 
@@ -17,6 +17,4 @@ class ApiResponse<T> {
   String toString(){
     return 'Status : $status \n  Message : $message \n data : $data'; 
   }
-
-
 }
