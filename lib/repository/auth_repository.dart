@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:mvvm/data/network/baseApiService.dart';
 import 'package:mvvm/data/network/networkApiService.dart';
+import 'package:mvvm/model/user_data_model.dart';
 import 'package:mvvm/res/app_urls.dart';
 import 'package:provider/provider.dart';
 
@@ -29,6 +30,16 @@ class AuthRepository {
       return response;
     } catch (e) {
       debugPrint('RAGISTER ERROR : ${e.toString()}');
+    }
+  }
+
+  Future<UserDataModel> getUserDataApi() async {
+    try {
+      dynamic response = _apiServices.getGetApiResponse(AppUrls.userDataUrl);
+      return response = UserDataModel.fromJson(response);
+    } catch (e) {
+      debugPrint('USER_DATA ERROR : ${e.toString()}');
+      throw e;
     }
   }
 }

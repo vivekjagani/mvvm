@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:mvvm/data/response/api_response.dart';
+import 'package:mvvm/model/user_data_model.dart';
 import 'package:mvvm/model/user_model.dart';
 import 'package:mvvm/repository/auth_repository.dart';
 import 'package:mvvm/utils/routes/routes_name.dart';
@@ -57,6 +59,23 @@ class AuthViewModel with ChangeNotifier {
       setSignUpLoading(false);
       Utils.flushBarErrorMessage(error.toString(), context);
       debugPrint(error.toString());
+    });
+  }
+
+  ApiResponse<UserDataModel> userData = ApiResponse.loading();
+
+  setUserList(ApiResponse<UserDataModel> response) {
+    userData = response;
+    notifyListeners();
+  }
+
+  Future<void> getUserDataApi(dynamic data, BuildContext context) async {
+    setUserList(ApiResponse.loading());
+
+    myRepo.getUserDataApi().then((value) {
+      setUserList(ApiResponse.completed(value));
+    }).onError((error, stackTrace) {
+      setUserList(ApiResponse.error(error.toString()));
     });
   }
 }
